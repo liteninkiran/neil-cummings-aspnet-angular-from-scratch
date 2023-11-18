@@ -2,8 +2,10 @@
 using System.Text;
 using API.Controllers;
 using API.Data;
+using API.DTOs;
 using API.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API;
 
@@ -17,13 +19,16 @@ public class AccountController : BaseApiController
     }
 
     [HttpPost("register")]
-    public async Task<ActionResult<AppUser>> Register(string username, string password)
+    public async Task<ActionResult<AppUser>> Register(RegisterDto registerDto)
     {
+        if (await UsersExists(registerDto.Username)) {
+            return BadRequest("Username already exists");
+        }
         using var hmac = new HMACSHA512();
         var user = new AppUser
         {
-            UserName = username,
-            PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password)),
+            UserName = registerDto.Username.ToLower(),
+            PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
             PasswordSalt = hmac.Key,
         };
 
@@ -31,5 +36,10 @@ public class AccountController : BaseApiController
         await _context.SaveChangesAsync();
 
         return user;
+    }
+
+    private async Task<bool> UsersExists(string username)
+    {
+        return await _context.Users.AnyAsync(user => user.UserName == username.ToLower());
     }
 }

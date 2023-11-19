@@ -27,29 +27,29 @@
                 <a class="nav-link" href="#">Messages</a>
             </li>
 
-            <!-- Logout -->
-            <li class="nav-item" (click)="logout()">
-                <a class="nav-link" href="#">Logout</a>
-            </li>
         </ul>
 
         <!-- Dropdown Menu -->
-        <div class="dropdown" *ngIf="loggedIn">
+        <div class="dropdown" *ngIf="loggedIn" dropdown>
 
-            <a class="dropdown-toggle text-light">
-                Welcome User
+            <!-- Dropdown Title -->
+            <a class="dropdown-toggle text-light text-decoration-none" dropdownToggle>
+                Welcome {{ model.username | titlecase }}
             </a>
 
-            <div class="dropdown-menu">
+            <!-- Menu Items -->
+            <div class="dropdown-menu" *dropdownMenu>
+
+                <!-- Edit Profile -->
                 <a class="dropdown-item">
                     Edit Profile
                 </a>
-            </div>
 
-            <div class="dropdown-menu">
+                <!-- Logout -->
                 <a class="dropdown-item" (click)="logout()">
                     Logout
                 </a>
+
             </div>
 
         </div>

@@ -8,7 +8,10 @@ import { AccountService } from '../_services/account.service';
 })
 export class NavComponent implements OnInit {
 
-    public model: any = {}
+    public model: any = {
+        username: 'sarah',
+        password: 'password',
+    }
     public loggedIn = false;
 
     constructor(

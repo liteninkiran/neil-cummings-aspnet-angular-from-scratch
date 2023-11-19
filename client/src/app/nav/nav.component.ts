@@ -9,7 +9,7 @@ import { AccountService } from '../_services/account.service';
 export class NavComponent implements OnInit {
 
     public model: any = {}
-    private loggedIn = false;
+    public loggedIn = false;
 
     constructor(
         private accountService: AccountService,
@@ -34,5 +34,9 @@ export class NavComponent implements OnInit {
 
             },
         });
+    }
+
+    public logout(): void {
+        this.loggedIn = false;
     }
 }

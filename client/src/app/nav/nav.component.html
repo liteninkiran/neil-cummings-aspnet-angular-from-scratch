@@ -10,7 +10,7 @@
         </a>
 
         <!-- Links -->
-        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0" *ngIf="loggedIn">
 
             <!-- Matches -->
             <li class="nav-item">
@@ -26,10 +26,36 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">Messages</a>
             </li>
+
+            <!-- Logout -->
+            <li class="nav-item" (click)="logout()">
+                <a class="nav-link" href="#">Logout</a>
+            </li>
         </ul>
 
+        <!-- Dropdown Menu -->
+        <div class="dropdown" *ngIf="loggedIn">
+
+            <a class="dropdown-toggle text-light">
+                Welcome User
+            </a>
+
+            <div class="dropdown-menu">
+                <a class="dropdown-item">
+                    Edit Profile
+                </a>
+            </div>
+
+            <div class="dropdown-menu">
+                <a class="dropdown-item" (click)="logout()">
+                    Logout
+                </a>
+            </div>
+
+        </div>
+
         <!-- Search -->
-        <form class="d-flex" #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off">
+        <form class="d-flex" #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off" *ngIf="!loggedIn">
 
             <!-- Username -->
             <input
@@ -42,7 +68,7 @@
 
             <!-- Password -->
             <input
-                name="username"
+                name="password"
                 [(ngModel)]="model.password"
                 class="form-control me-2"
                 type="password"

@@ -29,10 +29,29 @@
         </ul>
 
         <!-- Search -->
-        <form class="d-flex">
-            <input class="form-control me-2" type="text" placeholder="Username">
-            <input class="form-control me-2" type="password" placeholder="Password">
+        <form class="d-flex" #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off">
+
+            <!-- Username -->
+            <input
+                name="username"
+                [(ngModel)]="model.username"
+                class="form-control me-2"
+                type="text"
+                placeholder="Username"
+            >
+
+            <!-- Password -->
+            <input
+                name="username"
+                [(ngModel)]="model.password"
+                class="form-control me-2"
+                type="password"
+                placeholder="Password"
+            >
+
+            <!-- Login Button -->
             <button class="btn btn-outline-light" type="submit">Login</button>
+
         </form>
 
     </div>

@@ -10,7 +10,7 @@
         </a>
 
         <!-- Links -->
-        <ul class="navbar-nav me-auto mb-2 mb-md-0" *ngIf="loggedIn">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0" *ngIf="accountService.currentUser$ | async">
 
             <!-- Matches -->
             <li class="nav-item">
@@ -30,7 +30,7 @@
         </ul>
 
         <!-- Dropdown Menu -->
-        <div class="dropdown" *ngIf="loggedIn" dropdown>
+        <div class="dropdown" *ngIf="accountService.currentUser$ | async" dropdown>
 
             <!-- Dropdown Title -->
             <a class="dropdown-toggle text-light text-decoration-none" dropdownToggle>
@@ -55,7 +55,7 @@
         </div>
 
         <!-- Search -->
-        <form class="d-flex" #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off" *ngIf="!loggedIn">
+        <form class="d-flex" #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off" *ngIf="!(accountService.currentUser$ | async)">
 
             <!-- Username -->
             <input

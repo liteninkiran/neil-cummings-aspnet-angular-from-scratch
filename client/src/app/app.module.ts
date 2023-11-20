@@ -15,6 +15,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './_modules/shared.module';
+import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
 
 @NgModule({
     declarations: [
@@ -26,6 +27,7 @@ import { SharedModule } from './_modules/shared.module';
         MessagesComponent,
         NavComponent,
         RegisterComponent,
+        TestErrorsComponent,
     ],
     imports: [
         AppRoutingModule,

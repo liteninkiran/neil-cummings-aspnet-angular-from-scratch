@@ -12,20 +12,25 @@
         <!-- Links -->
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
 
-            <!-- Matches -->
-            <li class="nav-item">
-                <a class="nav-link" routerLink="/members" routerLinkActive="active">Matches</a>
-            </li>
+            <ng-container *ngIf="accountService.currentUser$ | async">
 
-            <!-- Lists -->
-            <li class="nav-item">
-                <a class="nav-link" routerLink="/lists" routerLinkActive="active">Lists</a>
-            </li>
+                <!-- Matches -->
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/members" routerLinkActive="active">Matches</a>
+                </li>
 
-            <!-- Messages -->
-            <li class="nav-item">
-                <a class="nav-link" routerLink="/messages" routerLinkActive="active">Messages</a>
-            </li>
+                <!-- Lists -->
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/lists" routerLinkActive="active">Lists</a>
+                </li>
+
+                <!-- Messages -->
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/messages" routerLinkActive="active">Messages</a>
+                </li>
+
+            </ng-container>
+
 
         </ul>
 

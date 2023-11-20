@@ -8,7 +8,6 @@ import { AccountService } from '../_services/account.service';
 })
 export class RegisterComponent implements OnInit {
 
-    @Input() usersFromHomeComponent: any;
     @Output() cancelRegister = new EventEmitter<boolean>()
 
     public model: any = {}
@@ -18,11 +17,13 @@ export class RegisterComponent implements OnInit {
     public ngOnInit(): void { }
 
     public register(): void {
-        console.log(this.model);
+        this.accountService.register(this.model).subscribe({
+            next: () => this.cancel(),
+            error: error => console.log(error),
+        });
     }
 
     public cancel(): void {
         this.cancelRegister.emit(false);
     }
-
 }

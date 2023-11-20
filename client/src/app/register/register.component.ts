@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AccountService } from '../_services/account.service';
+import { ToastrService } from 'ngx-toastr';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'app-register',
@@ -12,14 +14,20 @@ export class RegisterComponent implements OnInit {
 
     public model: any = {}
 
-    constructor(private accountService: AccountService) { }
+    constructor(
+        private accountService: AccountService,
+        private toastr: ToastrService,
+    ) { }
 
     public ngOnInit(): void { }
 
     public register(): void {
         this.accountService.register(this.model).subscribe({
             next: () => this.cancel(),
-            error: error => console.log(error),
+            error: (error: HttpErrorResponse) => {
+                this.toastr.error(error.error);
+                console.log(error);
+            },
         });
     }
 

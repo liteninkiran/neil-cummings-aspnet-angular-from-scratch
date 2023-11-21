@@ -25,13 +25,7 @@ export class NavComponent implements OnInit {
     public ngOnInit(): void { }
 
     public login(): void {
-        this.accountService.login(this.model).subscribe({
-            next: () => this.router.navigateByUrl('/members'),
-            error: (error: HttpErrorResponse) => this.toastr.error(error.error),
-            complete: () => {
-
-            },
-        });
+        this.accountService.login(this.model).subscribe(() => this.router.navigateByUrl('/members'));
     }
 
     public logout(): void {

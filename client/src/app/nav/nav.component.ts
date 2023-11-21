@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../_services/account.service';
 import { Router } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-nav',
@@ -12,14 +10,13 @@ import { ToastrService } from 'ngx-toastr';
 export class NavComponent implements OnInit {
 
     public model: any = {
-        username: 'sarah',
-        password: 'password',
+        username: 'lisa',
+        password: 'Pa$$w0rd',
     }
 
     constructor(
         public accountService: AccountService,
         private router: Router,
-        private toastr: ToastrService,
     ) { }
 
     public ngOnInit(): void { }

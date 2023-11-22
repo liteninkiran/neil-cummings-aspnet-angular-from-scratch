@@ -1,7 +1,15 @@
+<!-- Member Card -->
 <div class="card mb-4" *ngIf="member">
+
+    <!-- Container -->
     <div class="card-img-wrapper">
+
+        <!-- Profile Image -->
         <img [src]="member.photoUrl || './assets/user.png'" [alt]="member.knownAs" class="card-img-top">
+
     </div>
+
+    <!-- Member Details -->
     <div class="card-body p-1">
         <h6 class="card-title text-center mb-1">
             <i class="fa fa-user me-2"></i>
@@ -9,4 +17,5 @@
         </h6>
         <p class="card-text text-muted text-center">{{ member.city }}</p>
     </div>
+
 </div>

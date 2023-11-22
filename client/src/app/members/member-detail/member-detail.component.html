@@ -58,8 +58,38 @@
 
     </div>
 
+    <!-- Member Details -->
     <div class="col-8">
 
+        <!-- Tabs -->
+        <tabset class="member-tabset">
+
+            <!-- About -->
+            <tab heading="About {{member.knownAs}}">
+                <h4>Description</h4>
+                <p>{{ member.introduction }}</p>
+                <h4>Looking for</h4>
+                <p>{{ member.lookingFor }}</p>
+            </tab>
+
+            <!-- Interests -->
+            <tab heading="Interests">
+                <h4>Interests</h4>
+                <p>{{ member.interests }}</p>
+            </tab>
+
+            <!-- Photos -->
+            <tab heading="Photos" #photoTab="tab">
+                Photos will go here
+            </tab>
+
+            <!-- Messages -->
+            <tab heading="Messages">
+                <p>Messages will go here</p>
+            </tab>
+
+        </tabset>
+ 
     </div>
 
 </div>

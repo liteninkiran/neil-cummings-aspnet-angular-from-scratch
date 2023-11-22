@@ -80,7 +80,7 @@
 
             <!-- Photos -->
             <tab heading="Photos" #photoTab="tab">
-                Photos will go here
+                <gallery *ngIf="photoTab.active" [items]="images" class="gallery"></gallery>
             </tab>
 
             <!-- Messages -->

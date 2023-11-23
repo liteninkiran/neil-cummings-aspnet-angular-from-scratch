@@ -1,0 +1,34 @@
+<div class="row" *ngIf="member">
+
+    <!-- Container -->
+    <div class="col-2 mb-1" *ngFor="let photo of member.photos">
+
+        <!-- Photo -->
+        <img [src]="photo.url" alt="photo of user" class="img-thumbnail mb-1">
+
+        <!-- Button Container -->
+        <div class="text-center">
+
+            <!-- Set As Main Image -->
+            <button  
+                class="btn btn-sm me-2"
+                [disabled]="photo.isMain"
+                (click)="setMainPhoto(photo)"
+            >
+                Main
+            </button>
+
+            <!-- Delete -->
+            <button 
+                [disabled]="photo.isMain"
+                (click)="deletePhoto(photo.id)"
+                class="btn btn-sm btn-danger"
+            >
+                <i class="fa fa-trash"></i>
+            </button>
+
+        </div>
+
+    </div>
+
+</div>

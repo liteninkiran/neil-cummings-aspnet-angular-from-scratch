@@ -18,8 +18,7 @@ export class AccountService {
     public register(model: any): Observable<User> {
         return this.http.post<User>(`${this.baseUrl}account/register`, model).pipe(
             map((response: User) => {
-                localStorage.setItem('user', JSON.stringify(response));
-                this.currentUserSource.next(response);
+                this.setCurrentUser(response);
                 return response;
             }),
         );
@@ -28,8 +27,7 @@ export class AccountService {
     public login(model: any): Observable<User> {
         return this.http.post<User>(`${this.baseUrl}account/login`, model).pipe(
             map((response: User) => {
-                localStorage.setItem('user', JSON.stringify(response));
-                this.currentUserSource.next(response);
+                this.setCurrentUser(response);
                 return response;
             }),
         );
@@ -41,6 +39,7 @@ export class AccountService {
     }
 
     public setCurrentUser(user: User): void {
+        localStorage.setItem('user', JSON.stringify(user));
         this.currentUserSource.next(user);
     }
 }

@@ -32,7 +32,7 @@ export class MembersService {
         return this.http.get<Member>(`${this.baseUrl}users/${username}`);
     }
 
-    public updateMember(member: Member) {
+    public updateMember(member: Member): Observable<any> {
         return this.http.put(`${this.baseUrl}users`, member).pipe(
             map(() => {
                 const index = this.members.indexOf(member);
@@ -40,4 +40,8 @@ export class MembersService {
             })
         );
     }
+
+    public setMainPhoto(photoId: number): Observable<any> {
+        return this.http.put(`${this.baseUrl}users/set-main-photo/${photoId}`, {});
+    }    
 }

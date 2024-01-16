@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AccountService } from '../_services/account.service';
 import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'app-register',
@@ -13,25 +14,37 @@ export class RegisterComponent implements OnInit {
     @Output() cancelRegister = new EventEmitter<boolean>()
 
     public model: any = {}
+    public registerForm: FormGroup = new FormGroup({});
 
     constructor(
         private accountService: AccountService,
         private toastr: ToastrService,
     ) { }
 
-    public ngOnInit(): void { }
+    public ngOnInit(): void {
+        this.initialiseForm();
+    }
 
     public register(): void {
-        this.accountService.register(this.model).subscribe({
-            next: () => this.cancel(),
-            error: (error: HttpErrorResponse) => {
-                this.toastr.error(error.error);
-                console.log(error);
-            },
-        });
+        console.log(this.registerForm.value);
+        // this.accountService.register(this.model).subscribe({
+        //     next: () => this.cancel(),
+        //     error: (error: HttpErrorResponse) => {
+        //         this.toastr.error(error.error);
+        //         console.log(error);
+        //     },
+        // });
     }
 
     public cancel(): void {
         this.cancelRegister.emit(false);
+    }
+
+    private initialiseForm(): void {
+        this.registerForm = new FormGroup({
+            username: new FormControl(),
+            password: new FormControl(),
+            confirmPassword: new FormControl(),
+        });
     }
 }

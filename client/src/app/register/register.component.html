@@ -14,7 +14,12 @@
             class="form-control" 
             formControlName="username"
             placeholder="Username"
+            [class.is-invalid]="registerForm.get('username')?.errors && registerForm.get('username')?.touched"
         >
+
+        <!-- Validation: Required -->
+        <div class="invalid-feedback">Please enter a username</div>
+
     </div>
 
     <!-- Password -->
@@ -24,7 +29,18 @@
             class="form-control" 
             formControlName="password"
             placeholder="Password"
+            [class.is-invalid]="registerForm.get('password')?.errors && registerForm.get('password')?.touched"
         >
+
+        <!-- Validation: Required -->
+        <div class="invalid-feedback" *ngIf="registerForm.get('password')?.hasError('required')">Please enter a password</div>
+
+        <!-- Validation: Minimum Length -->
+        <div class="invalid-feedback" *ngIf="registerForm.get('password')?.hasError('minlength')">Minimum length is 4 characters</div>
+
+        <!-- Validation: Maxmimum Length -->
+        <div class="invalid-feedback" *ngIf="registerForm.get('password')?.hasError('maxlength')">Maximum length is 8 characters</div>
+
     </div>
 
     <!-- Confirm Password -->
@@ -34,7 +50,15 @@
             class="form-control" 
             formControlName="confirmPassword"
             placeholder="Confirm Password"
+            [class.is-invalid]="registerForm.get('confirmPassword')?.errors && registerForm.get('confirmPassword')?.touched"
         >
+
+        <!-- Validation: Required -->
+        <div class="invalid-feedback" *ngIf="registerForm.get('confirmPassword')?.hasError('required')">Please confirm password</div>
+
+        <!-- Validation: Passwords Match -->
+        <div class="invalid-feedback" *ngIf="registerForm.get('confirmPassword')?.hasError('notMatching')">Passwords do not match</div>
+
     </div>
 
     <!-- Register / Cancel -->

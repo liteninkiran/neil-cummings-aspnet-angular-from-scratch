@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AccountService } from '../_services/account.service';
 import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-register',
@@ -42,9 +42,13 @@ export class RegisterComponent implements OnInit {
 
     private initialiseForm(): void {
         this.registerForm = new FormGroup({
-            username: new FormControl(),
-            password: new FormControl(),
-            confirmPassword: new FormControl(),
+            username: new FormControl('', Validators.required),
+            password: new FormControl('', [
+                Validators.required,
+                Validators.minLength(4),
+                Validators.maxLength(8),
+            ]),
+            confirmPassword: new FormControl('', Validators.required),
         });
     }
 }

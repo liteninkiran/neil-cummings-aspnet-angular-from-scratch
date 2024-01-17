@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AccountService } from '../_services/account.service';
 import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-register',
@@ -48,7 +48,25 @@ export class RegisterComponent implements OnInit {
                 Validators.minLength(4),
                 Validators.maxLength(8),
             ]),
-            confirmPassword: new FormControl('', Validators.required),
+            confirmPassword: new FormControl('', [
+                Validators.required,
+                this.matchValues('password'),
+            ]),
         });
+
+        this.registerForm
+            .controls['password']
+            .valueChanges
+            .subscribe(() =>
+                this.registerForm
+                    .controls['confirmPassword']
+                    .updateValueAndValidity()
+            );
+    }
+
+    private matchValues(matchTo: string): ValidatorFn {
+        return (control: AbstractControl) => {
+            return control.value === control.parent?.get(matchTo)?.value ? null : { notMatching: true };
+        }
     }
 }
